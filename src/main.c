@@ -1,1 +1,0 @@
-/* EclipseIR source without architecture specific assembly */
