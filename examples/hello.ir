@@ -1,0 +1,8 @@
+// EclipseIR — hello world example
+@msg = c"Hello, EclipseIR!\n"
+
+func @main() -> i32 {
+    puts @msg
+    %0 = const i32 0
+    ret i32 %0
+}

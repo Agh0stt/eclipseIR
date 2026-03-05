@@ -1,0 +1,24 @@
+// EclipseIR — raw syscall demo
+// Uses syscall directly for write + exit
+
+@msg = c"raw syscall: hello!\n"
+@len = i64 20
+
+func @main() -> i32 {
+    // sys_write(1, msg, 20)
+    %0 = const i64 1      // fd = stdout
+    %1 = const i64 0      // placeholder for msg ptr (use puts for real str)
+    %2 = const i64 20     // length
+
+    // syscall 64 = sys_write
+    // %result = syscall 64 %fd %buf %len
+    // (for real use, wire up adrp/lo12 for buf — puts @msg is the easy path)
+    puts @msg
+
+    // sys_exit(0) via syscall instruction
+    %3 = const i64 0
+    syscall 93 %3
+
+    %4 = const i32 0
+    ret i32 %4
+}

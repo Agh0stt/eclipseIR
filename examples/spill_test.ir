@@ -1,0 +1,30 @@
+// EclipseIR v1.1.0 — spill test
+// Uses 25+ vregs to force register spilling
+
+func @main() -> i32 {
+    %0  = const i32 1
+    %1  = const i32 2
+    %2  = const i32 3
+    %3  = const i32 4
+    %4  = const i32 5
+    %5  = const i32 6
+    %6  = const i32 7
+    %7  = const i32 8
+    %8  = const i32 9
+    %9  = const i32 10
+    %10 = const i32 11
+    %11 = const i32 12
+    %12 = add i32 %0 %1
+    %13 = add i32 %2 %3
+    %14 = add i32 %4 %5
+    %15 = add i32 %6 %7
+    %16 = add i32 %8 %9
+    %17 = add i32 %10 %11
+    %18 = add i32 %12 %13
+    %19 = add i32 %14 %15
+    %20 = add i32 %16 %17
+    %21 = add i32 %18 %19
+    %22 = add i32 %20 %21
+    %23 = add i32 %22 %0
+    ret i32 %23
+}

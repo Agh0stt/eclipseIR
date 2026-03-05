@@ -1,0 +1,29 @@
+// EclipseIR v1.1.0 — strlen + bitwise demo
+
+@greeting = c"Hello from EclipseIR!\n"
+@fmt      = c"length computed\n"
+
+func @main() -> i32 {
+    // Print greeting
+    puts @greeting
+
+    // Get string length
+    %0 = strlen @greeting
+
+    // Bitwise ops demo
+    %1 = const i64 0xFF
+    %2 = const i64 0x0F
+    %3 = and i64 %1 %2    // 0x0F
+    %4 = or  i64 %1 %2    // 0xFF
+    %5 = xor i64 %1 %2    // 0xF0
+    %6 = shl i64 %2 %2    // 0x0F << 0x0F = 0x780
+    %7 = shr i64 %6 %2    // back to 0x0F
+
+    // neg demo
+    %8  = const i32 42
+    %9  = neg i32 %8      // -42
+
+    puts @fmt
+
+    ret i32 %9
+}

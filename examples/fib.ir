@@ -1,0 +1,39 @@
+// EclipseIR — arithmetic + control flow example
+// Computes fibonacci(10) iteratively
+
+func @fib(i32 %0) -> i32 {
+    // if n <= 1 return n
+    %1 = const i32 1
+    %2 = le i32 %0 %1
+    if_goto %2 Lbase
+
+    // a=0, b=1, i=2
+    %3 = const i32 0
+    %4 = const i32 1
+    %5 = const i32 2
+
+Lloop:
+    %6 = gt i32 %5 %0
+    if_goto %6 Ldone
+
+    // tmp = a + b
+    %7 = add i32 %3 %4
+    // a = b
+    %8 = add i32 %4 %1   // move b into a position (b + 0 trick - optimizer will fold)
+    // b = tmp
+    // i++
+    %9 = add i32 %5 %1
+    goto Lloop
+
+Lbase:
+    ret i32 %0
+
+Ldone:
+    ret i32 %4
+}
+
+func @main() -> i32 {
+    %0 = const i32 10
+    %1 = call @fib(%0)
+    ret i32 %1
+}
